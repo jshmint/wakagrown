@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WakaGrown</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; overflow: hidden;
+  }
+  .wrap {
+    position: relative;
+    width: 560px;
+    height: 680px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .logo-img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 560px;
+    height: 560px;
+    object-fit: contain;
+    z-index: 2;
+    animation: introScale 1.2s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  @keyframes introScale {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  /* smoke sits behind logo */
+  #smokeCanvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 560px;
+    height: 680px;
+    z-index: 1;
+    pointer-events: none;
+  }
+  /* glow effects sit on top */
+  #fxCanvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 560px;
+    height: 560px;
+    z-index: 3;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <canvas id="smokeCanvas" width="560" height="680"></canvas>
+  <img class="logo-img" id="logo" src="WakaGrownlogo.PNG" alt="WakaGrown logo">
+  <canvas id="fxCanvas" width="560" height="560"></canvas>
+</div>
+<script>
+const S  = 560;
+
+// ── Measured from the actual logo image (560×560 canvas) ──
+// The medallion circle center sits at roughly 50% x, 42% y
+const CX      = 280;
+const CY      = 236;
+const RING_R  = 188;   // outer edge of greek-key band
+const INNER_R = 150;   // edge of dark inner circle
+// W glyph lives in the left half, G in the right half
+const W_CX = CX - 58;  const W_CY = CY + 4;
+const G_CX = CX + 54;  const G_CY = CY + 4;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SMOKE
+// ─────────────────────────────────────────────────────────────────────────────
+const smokeCanvas = document.getElementById('smokeCanvas');
+const sc = smokeCanvas.getContext('2d');
+
+class SmokeParticle {
+  constructor(born) { this.reset(born); }
+
+  reset(born) {
+    const t = Math.random();
+    if (t < 0.60) {
+      // wide base band — full canvas width
+      this.x = 10 + Math.random() * 540;
+      this.y = CY + INNER_R * 0.92 + Math.random() * 40;
+    } else if (t < 0.78) {
+      // left curtain
+      this.x = Math.random() * 110;
+      this.y = CY + 70 + Math.random() * 150;
+    } else if (t < 0.92) {
+      // right curtain
+      this.x = 450 + Math.random() * 110;
+      this.y = CY + 70 + Math.random() * 150;
+    } else {
+      // low floor pool
+      this.x = 10 + Math.random() * 540;
+      this.y = CY + INNER_R + 40 + Math.random() * 90;
+    }
+
+    this.vx       = (Math.random() - 0.5) * 0.5;
+    this.vy       = -(0.18 + Math.random() * 0.55);
+    this.life     = born ? Math.random() * (200 + Math.random() * 260) : 0;
+    this.maxLife  = 200 + Math.random() * 260;
+    this.r        = 50 + Math.random() * 80;
+    this.rot      = Math.random() * Math.PI * 2;
+    this.rotSpeed = (Math.random() - 0.5) * 0.005;
+    this.gray     = 120 + Math.floor(Math.random() * 100);
+    this.blue     = Math.random() < 0.3 ? 40 : 0;
+    this.peak     = 0.26 + Math.random() * 0.18;
+  }
+
+  update() {
+    this.life++;
+    this.x  += this.vx + Math.sin(this.life * 0.015 + this.rot) * 0.22;
+    this.y  += this.vy;
+    this.vy *= 0.9997;
+    this.vx += (Math.random() - 0.5) * 0.04;
+    this.rot += this.rotSpeed;
+    this.r  += 0.28;
+    if (this.life >= this.maxLife) this.reset(false);
+  }
+
+  draw(ctx) {
+    const p = this.life / this.maxLife;
+    let a = p < 0.10  ? (p / 0.10) * this.peak
+          : p > 0.62  ? ((1 - p) / 0.38) * this.peak
+          : this.peak;
+
+    const c = this.gray;
+    const b = Math.min(255, c + this.blue);
+    const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r);
+    g.addColorStop(0,    `rgba(${c},${c},${b},${a})`);
+    g.addColorStop(0.38, `rgba(${c},${c},${b},${a * 0.72})`);
+    g.addColorStop(0.72, `rgba(${c},${c},${b},${a * 0.28})`);
+    g.addColorStop(1,    `rgba(${c},${c},${b},0)`);
+
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rot);
+    ctx.translate(-this.x, -this.y);
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = g;
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+const particles = Array.from({ length: 220 }, (_, i) => new SmokeParticle(true));
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FX  (clean, targeted overlays — no stray blobs)
+// ─────────────────────────────────────────────────────────────────────────────
+const fxCanvas = document.getElementById('fxCanvas');
+const ctx = fxCanvas.getContext('2d');
+let t = 0;
+
+// Orbiting shimmer dot on the greek-key ring only
+function drawRingShimmer(angle) {
+  const x = CX + Math.cos(angle) * RING_R;
+  const y = CY + Math.sin(angle) * RING_R;
+
+  ctx.save();
+  // clip to annular ring band so shimmer never bleeds inside or outside
+  ctx.beginPath();
+  ctx.arc(CX, CY, RING_R + 12, 0, Math.PI * 2);
+  ctx.arc(CX, CY, INNER_R,     0, Math.PI * 2, true);
+  ctx.clip();
+
+  const g = ctx.createRadialGradient(x, y, 0, x, y, 34);
+  g.addColorStop(0,   'rgba(255,255,255,0.60)');
+  g.addColorStop(0.35,'rgba(220,232,255,0.28)');
+  g.addColorStop(1,   'rgba(0,0,0,0)');
+  ctx.fillStyle = g;
+  ctx.beginPath();
+  ctx.arc(x, y, 34, 0, Math.PI * 2);
+  ctx.fill();
+
+  // soft trailing dot
+  const tx = CX + Math.cos(angle - 1.1) * RING_R;
+  const ty = CY + Math.sin(angle - 1.1) * RING_R;
+  const g2 = ctx.createRadialGradient(tx, ty, 0, tx, ty, 18);
+  g2.addColorStop(0,  'rgba(200,215,255,0.20)');
+  g2.addColorStop(1,  'rgba(0,0,0,0)');
+  ctx.fillStyle = g2;
+  ctx.beginPath();
+  ctx.arc(tx, ty, 18, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+// Blue neon pulse — clipped strictly to the left half of the inner circle
+function drawNeonW(pulse, flicker) {
+  const a = (0.80 + pulse * 0.20) * (1 - flicker * 0.55);
+
+  ctx.save();
+  // clip: left semicircle of inner circle
+  ctx.beginPath();
+  ctx.arc(CX, CY, INNER_R - 2, Math.PI * 0.5, Math.PI * 1.5);
+  ctx.lineTo(CX, CY);
+  ctx.closePath();
+  ctx.clip();
+
+  // outer diffuse halo
+  const g1 = ctx.createRadialGradient(W_CX, W_CY, 0, W_CX, W_CY, 110);
+  g1.addColorStop(0,    `rgba(28,105,255,${0.28 * a})`);
+  g1.addColorStop(0.50, `rgba(18, 70,210,${0.10 * a})`);
+  g1.addColorStop(1,    'rgba(0,0,0,0)');
+  ctx.fillStyle = g1;
+  ctx.beginPath(); ctx.arc(W_CX, W_CY, 110, 0, Math.PI * 2); ctx.fill();
+
+  // tight core glow
+  const g2 = ctx.createRadialGradient(W_CX, W_CY, 0, W_CX, W_CY, 54);
+  g2.addColorStop(0,   `rgba(85,165,255,${0.58 * a})`);
+  g2.addColorStop(0.55,`rgba(50,120,240,${0.25 * a})`);
+  g2.addColorStop(1,   'rgba(0,0,0,0)');
+  ctx.fillStyle = g2;
+  ctx.beginPath(); ctx.arc(W_CX, W_CY, 54, 0, Math.PI * 2); ctx.fill();
+
+  ctx.restore();
+}
+
+// Silver sheen — clipped to right half of inner circle
+function drawSilverG(shimmer) {
+  const s = 0.5 + 0.5 * Math.sin(shimmer);
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(CX, CY, INNER_R - 2, -Math.PI * 0.5, Math.PI * 0.5);
+  ctx.lineTo(CX, CY);
+  ctx.closePath();
+  ctx.clip();
+
+  const g = ctx.createRadialGradient(G_CX - 14, G_CY - 18, 0, G_CX, G_CY, 62);
+  g.addColorStop(0,    `rgba(222,236,255,${0.34 + s * 0.22})`);
+  g.addColorStop(0.50, `rgba(160,185,220,${0.10 + s * 0.07})`);
+  g.addColorStop(1,    'rgba(0,0,0,0)');
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(G_CX, G_CY, 62, 0, Math.PI * 2); ctx.fill();
+
+  ctx.restore();
+}
+
+// Single thin sweep beam across the inner circle
+function drawSweep(angle) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(CX, CY, INNER_R - 2, 0, Math.PI * 2);
+  ctx.clip();
+
+  const ox = CX + Math.cos(angle + Math.PI) * INNER_R;
+  const oy = CY + Math.sin(angle + Math.PI) * INNER_R;
+  const dx = CX + Math.cos(angle) * INNER_R * 1.4;
+  const dy = CY + Math.sin(angle) * INNER_R * 1.4;
+  const g = ctx.createLinearGradient(ox, oy, dx, dy);
+  g.addColorStop(0,    'rgba(255,255,255,0)');
+  g.addColorStop(0.46, 'rgba(255,255,255,0)');
+  g.addColorStop(0.50, 'rgba(255,255,255,0.055)');
+  g.addColorStop(0.54, 'rgba(255,255,255,0)');
+  g.addColorStop(1,    'rgba(255,255,255,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, S, S);
+  ctx.restore();
+}
+
+function loop() {
+  t++;
+
+  // ── smoke ──
+  sc.clearRect(0, 0, 560, 680);
+  particles.forEach(p => { p.update(); p.draw(sc); });
+  sc.globalAlpha = 0.45;
+  particles.forEach(p => p.draw(sc));
+  sc.globalAlpha = 1;
+
+  // ── fx ──
+  ctx.clearRect(0, 0, S, S);
+  drawRingShimmer((t * 0.018) % (Math.PI * 2) - Math.PI / 2);
+  drawNeonW(0.5 + 0.5 * Math.sin(t * 0.04), Math.random() < 0.007 ? Math.random() * 0.8 : 0);
+  drawSilverG(t * 0.025);
+  drawSweep((t * 0.012) % (Math.PI * 2));
+
+  requestAnimationFrame(loop);
+}
+
+document.getElementById('logo').onload = () => requestAnimationFrame(loop);
+</script>
+</body>
+</html>

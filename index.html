@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WakaGrown | Premium Flower</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ═══════════ AGE GATE ═══════════ -->
+<div id="ageGate">
+  <div class="ag-box">
+    <p class="ag-logo">WakaGrown</p>
+    <div class="ag-line"></div>
+    <h1 class="ag-title">Are you 21+?</h1>
+    <p class="ag-sub">You must be 21 or older to enter this site.</p>
+    <div class="ag-btns">
+      <button id="btnYes" class="btn-blue">Yes, I'm 21+</button>
+      <button id="btnNo"  class="btn-ghost">No</button>
+    </div>
+    <p class="ag-legal">By entering you confirm you are of legal age.</p>
+  </div>
+</div>
+
+<!-- ═══════════ DENIED SCREEN ═══════════ -->
+<div id="deniedScreen" class="denied-screen" style="display:none">
+  <div style="text-align:center">
+    <p class="ag-logo">WakaGrown</p>
+    <h2 style="font-family:var(--display);font-size:2rem;margin:1.5rem 0 1rem;letter-spacing:.04em">Come back when you're 21+</h2>
+    <p style="color:var(--muted)">This site is for adults only.</p>
+    <button onclick="resetGate()" class="btn-ghost" style="margin-top:2rem">Reset</button>
+  </div>
+</div>
+
+<!-- ═══════════ MAIN SITE ═══════════ -->
+<div id="site" style="display:none">
+
+  <!-- NAV -->
+  <header id="nav">
+    <div class="nav-inner wrap">
+      <a href="#hero" class="nav-logo">WakaGrown</a>
+      <button id="navToggle" class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="navMenu" class="nav-menu">
+        <a href="#drop"     class="nav-link">Drop</a>
+        <a href="#strains"  class="nav-link">Strains</a>
+        <a href="#seeds"    class="nav-link">Seeds</a>
+        <a href="#gallery"  class="nav-link">Gallery</a>
+        <a href="#story"    class="nav-link">Story</a>
+        <a href="#faq"      class="nav-link">FAQ</a>
+        <a href="#contact"  class="nav-link">Contact</a>
+        <button id="cartBtn" class="nav-cart-btn" aria-label="Open cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          <span id="cartBadge" class="cart-badge" hidden>0</span>
+          Cart
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-glow"></div>
+    <div class="wrap hero-wrap">
+      <div class="hero-content">
+        <span class="eyebrow reveal">Current Season Drop</span>
+        <h1 class="hero-title reveal">New Drop.<br>New Harvest.<br>New Heat.</h1>
+        <p class="hero-sub reveal">Limited preorder spots open now. Small-batch, lab-tested, handpicked. Secure yours before this run sells out.</p>
+        <div class="hero-cta reveal">
+          <a href="https://example.com/store" target="_blank" rel="noopener" class="btn-blue btn-lg">Shop / Order</a>
+          <a href="#drop" class="btn-ghost btn-lg">Explore the Drop</a>
+        </div>
+      </div>
+      <div class="hero-logo-frame reveal">
+        <div class="hero-logo-outer">
+          <div class="hero-logo-ring"></div>
+          <div class="hero-logo-circle">
+            <img src="WakaGrownlogo.PNG" alt="WakaGrown" class="hero-logo-img">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- DROP HIGHLIGHTS -->
+  <section id="drop" class="section">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Featured</span>
+        <h2 class="sec-title">Drop Highlights</h2>
+        <p class="sec-sub">Eight strains. One season. Zero compromise.</p>
+      </div>
+    </div>
+    <div class="carousel-outer">
+      <button id="cPrev" class="c-arrow" aria-label="Previous">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="cTrack"></div>
+      </div>
+      <button id="cNext" class="c-arrow" aria-label="Next">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+    <div class="c-dots" id="cDots"></div>
+  </section>
+
+  <!-- STRAINS GRID -->
+  <section id="strains" class="section section-alt">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Full Catalog</span>
+        <h2 class="sec-title">All Strains</h2>
+        <p class="sec-sub">28 cultivars. Filter by profile.</p>
+      </div>
+      <div class="filters reveal" role="group" aria-label="Filter by category">
+        <button class="chip active" data-f="all">All</button>
+        <button class="chip" data-f="gas">Gas</button>
+        <button class="chip" data-f="candy">Candy</button>
+        <button class="chip" data-f="og">OG</button>
+        <button class="chip" data-f="exotic">Exotic</button>
+      </div>
+      <div class="strains-grid" id="strainsGrid"></div>
+      <div class="strains-pagination" id="strainsPagination"></div>
+    </div>
+  </section>
+
+  <!-- SEEDS -->
+  <section id="seeds" class="section">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Genetics Program</span>
+        <h2 class="sec-title">Seeds</h2>
+        <p class="sec-sub">Feminized and auto-flowering cuts from our proven in-house runs. Every pack is sourced from verified mother stock.</p>
+      </div>
+      <div class="seed-filters reveal">
+        <button class="chip active" data-sf="all">All</button>
+        <button class="chip" data-sf="fem">Feminized</button>
+        <button class="chip" data-sf="auto">Auto-Flowering</button>
+      </div>
+      <div class="seeds-grid" id="seedsGrid"></div>
+      <div class="strains-pagination" id="seedsPagination"></div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="section">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Visual</span>
+        <h2 class="sec-title">Crafted to Photograph Different</h2>
+        <p class="sec-sub">Every run tells its own story. This is ours.</p>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section id="story" class="section section-alt">
+    <div class="wrap story-wrap">
+      <div class="story-text reveal">
+        <span class="eyebrow">Our Philosophy</span>
+        <h2 class="sec-title" style="text-align:left">Small-Batch.<br>No Gimmicks.<br>Just Quality.</h2>
+        <p>WakaGrown started from a simple principle: grow the best flower possible, then get out of the way and let it speak. No marketing fluff, no mystery ingredients — just elite genetics, obsessive environmental control, and the patience to let each run hit its full potential.</p>
+        <p>Every cultivar in our catalog is selected through a rigorous phenotype hunt. We run small. We test everything. We don't release a batch until it clears our internal standard — which is higher than any third-party requirement.</p>
+        <div class="story-stats">
+          <div class="stat reveal"><span class="stat-n">100%</span><span class="stat-l">Indoor Grown</span></div>
+          <div class="stat reveal"><span class="stat-n">COA</span><span class="stat-l">Every Batch</span></div>
+          <div class="stat reveal"><span class="stat-n">28+</span><span class="stat-l">Active Cultivars</span></div>
+        </div>
+      </div>
+      <div class="story-img reveal">
+        <div class="story-ph"><span class="story-mark">W</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="section">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Community</span>
+        <h2 class="sec-title">What the Culture Says</h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testi-q">"WakaGrown is the only brand that consistently delivers. Every single drop is a step above. The Red Katanaz was genuinely elite — terps, density, everything locked in."</p>
+          <div class="testi-author">
+            <div class="testi-av" style="--c:#0a84ff">WC</div>
+            <div><strong>@westcoast_connoisseur</strong><span>Verified Collector</span></div>
+          </div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testi-q">"The quality control here is unmatched. WakaGrown does small-batch the right way — no shortcuts, lab-tested, and the results speak for themselves every single time."</p>
+          <div class="testi-author">
+            <div class="testi-av" style="--c:#6b6bff">HD</div>
+            <div><strong>@highdesert_cultivator</strong><span>Industry Insider</span></div>
+          </div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testi-q">"Every drop is better than the last. The Venuz #4 and Banana Jealousy from last season were two of the best I've had, period. WakaGrown isn't hype — it's just exceptional."</p>
+          <div class="testi-author">
+            <div class="testi-av" style="--c:#38bdf8">PC</div>
+            <div><strong>@premiumcollector</strong><span>Long-Term Customer</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section section-alt">
+    <div class="wrap faq-wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Got Questions</span>
+        <h2 class="sec-title">FAQ</h2>
+      </div>
+      <div class="accordion" id="accordion">
+        <div class="ac-item reveal">
+          <button class="ac-btn" aria-expanded="false">How do preorders work? <span class="ac-icon"></span></button>
+          <div class="ac-panel" hidden><p>When a drop goes live, strains are listed on our external Shop page. Select your items and complete checkout there. Preorders are first-come, first-served — quantities are genuinely limited.</p></div>
+        </div>
+        <div class="ac-item reveal">
+          <button class="ac-btn" aria-expanded="false">Where do you ship? <span class="ac-icon"></span></button>
+          <div class="ac-panel" hidden><p>Shipping availability varies by location and compliance requirements. Visit our Shop page for real-time availability in your area. We do not ship to addresses where our products are not legally permissible.</p></div>
+        </div>
+        <div class="ac-item reveal">
+          <button class="ac-btn" aria-expanded="false">Is this an e-commerce checkout? <span class="ac-icon"></span></button>
+          <div class="ac-panel" hidden><p>No. This website is a brand showcase only — for informational purposes. No transactions occur here. All orders are placed through our verified external Shop link.</p></div>
+        </div>
+        <div class="ac-item reveal">
+          <button class="ac-btn" aria-expanded="false">How often do drops happen? <span class="ac-icon"></span></button>
+          <div class="ac-panel" hidden><p>Drops are tied to our cultivation cycle — typically seasonal. We don't rush harvests. Follow our Instagram and join the waitlist to be notified the moment spots go live.</p></div>
+        </div>
+        <div class="ac-item reveal">
+          <button class="ac-btn" aria-expanded="false">How do I verify lab results? <span class="ac-icon"></span></button>
+          <div class="ac-panel" hidden><p>Certificate of Analysis (COA) documents are available on the Shop page for every listed strain, linked directly to the batch. We use accredited third-party labs. Full transparency, always.</p></div>
+        </div>
+        <div class="ac-item reveal">
+          <button class="ac-btn" aria-expanded="false">How do I contact support? <span class="ac-icon"></span></button>
+          <div class="ac-panel" hidden><p>Use the contact form below or reach out on Instagram <strong>@wakagrown</strong>. For order-specific questions use the support contact on the Shop page. We typically respond within 24–48 hours.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="wrap contact-wrap">
+      <div class="contact-info reveal">
+        <span class="eyebrow">Get In Touch</span>
+        <h2 class="sec-title" style="text-align:left">Contact Us</h2>
+        <p>Questions about a drop, a strain, or a collaboration? Fill out the form or reach us directly.</p>
+        <div class="contact-links">
+          <div class="c-link"><span>Instagram</span><a href="https://instagram.com" target="_blank" rel="noopener">@wakagrown</a></div>
+          <div class="c-link"><span>Email</span><a href="mailto:info@wakagrown.com">info@wakagrown.com</a></div>
+        </div>
+      </div>
+      <form id="contactForm" class="contact-form reveal" novalidate>
+        <div class="field">
+          <label for="cfName">Name</label>
+          <input id="cfName" type="text" placeholder="Your name" required />
+          <span class="ferr"></span>
+        </div>
+        <div class="field">
+          <label for="cfEmail">Email</label>
+          <input id="cfEmail" type="email" placeholder="your@email.com" required />
+          <span class="ferr"></span>
+        </div>
+        <div class="field">
+          <label for="cfMsg">Message</label>
+          <textarea id="cfMsg" rows="5" placeholder="What's on your mind?" required></textarea>
+          <span class="ferr"></span>
+        </div>
+        <button type="submit" class="btn-blue btn-lg">Send Message</button>
+        <p id="formStatus" style="color:var(--blue-light);font-size:.85rem;margin-top:.5rem;min-height:1.2rem"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="footer-top">
+        <span class="nav-logo">WakaGrown</span>
+        <nav class="footer-nav">
+          <a href="#drop">Drop</a><a href="#strains">Strains</a>
+          <a href="#gallery">Gallery</a><a href="#story">Story</a>
+          <a href="#faq">FAQ</a><a href="#contact">Contact</a>
+        </nav>
+        <a href="https://example.com/store" target="_blank" rel="noopener" class="btn-blue">Shop / Order →</a>
+      </div>
+      <p class="footer-legal">For informational purposes only. No sales are conducted on this website. Must be 21+ to view.</p>
+      <div class="footer-bot">
+        <p>© 2026 WakaGrown. All rights reserved.</p>
+        <button onclick="resetGate()" class="footer-reset">Reset age gate</button>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- CART OVERLAY + DRAWER -->
+  <div id="cartOverlay" class="cart-overlay" aria-hidden="true"></div>
+  <aside id="cartDrawer" class="cart-drawer" hidden aria-label="Shopping cart">
+    <div class="cart-drawer__head">
+      <div>
+        <h2 class="cart-drawer__title">Your Cart</h2>
+        <p id="cartCount" class="cart-drawer__count">0 items</p>
+      </div>
+      <button id="cartClose" class="cart-close" aria-label="Close cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-drawer__foot" id="cartFoot" style="display:none">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <strong id="cartTotal">$0.00</strong>
+      </div>
+      <p class="cart-unit-note">Prices per eighth (3.5g). Lab-tested, small-batch.</p>
+      <button id="cartCheckout" class="btn-blue btn-lg" style="width:100%">Place Order →</button>
+      <button id="cartClear" class="cart-clear-btn">Clear cart</button>
+    </div>
+  </aside>
+
+  <!-- ORDER MODAL -->
+  <div id="orderModal" class="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="orderModalTitle">
+    <div class="modal-bd" id="orderModalBd"></div>
+    <div class="modal-box" style="max-width:480px">
+      <button class="modal-close" id="orderModalClose" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <div class="modal-body">
+        <h2 id="orderModalTitle" style="font-family:var(--display);font-size:1.3rem;font-weight:700;letter-spacing:.04em;margin-bottom:.3rem">Place Your Order</h2>
+        <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem">Fill in your details and we'll follow up to confirm and arrange payment.</p>
+        <div id="orderSummary"></div>
+        <form id="orderForm" novalidate>
+          <div class="field" style="margin-bottom:1rem">
+            <label for="ofName">Name</label>
+            <input id="ofName" type="text" placeholder="Your name" required />
+            <span class="ferr"></span>
+          </div>
+          <div class="field" style="margin-bottom:1rem">
+            <label for="ofEmail">Email</label>
+            <input id="ofEmail" type="email" placeholder="your@email.com" required />
+            <span class="ferr"></span>
+          </div>
+          <div class="field" style="margin-bottom:1.25rem">
+            <label for="ofNotes">Notes (optional)</label>
+            <textarea id="ofNotes" rows="3" placeholder="Any preferences or questions…"></textarea>
+          </div>
+          <button type="submit" class="btn-blue btn-lg" style="width:100%">Send Order</button>
+          <p id="orderStatus" style="color:var(--blue-light);font-size:.82rem;margin-top:.5rem;min-height:1rem"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /#site -->
+
+<!-- STRAIN MODAL -->
+<div id="strainModal" class="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="modalName">
+  <div class="modal-bd" id="modalBd"></div>
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-img" id="modalImg"></div>
+    <div class="modal-body">
+      <div class="modal-hdr">
+        <h2 class="modal-name" id="modalName"></h2>
+        <span class="pill" id="modalPill"></span>
+      </div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-terps">
+        <h4>Terpene Notes</h4>
+        <ul id="modalTerps"></ul>
+      </div>
+      <div class="modal-thc-row">
+        <span>THC Range</span>
+        <span id="modalThc" class="thc-val"></span>
+      </div>
+      <div class="modal-atc">
+        <div class="weight-selector">
+          <button class="weight-btn active" data-weight="7g">7g</button>
+          <button class="weight-btn" data-weight="14g">14g<small>½ oz</small></button>
+          <button class="weight-btn" data-weight="28g">28g<small>1 oz</small></button>
+        </div>
+        <div class="modal-price-row">
+          <span class="modal-price-label" id="modalPriceLabel">7 grams</span>
+          <strong id="modalPrice" class="modal-price-val"></strong>
+        </div>
+        <button id="modalAtcBtn" class="btn-blue btn-lg" style="width:100%;margin-top:.75rem">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" style="display:none" role="dialog" aria-modal="true">
+  <div class="lb-bd" id="lbBd"></div>
+  <button class="lb-close" id="lbClose" aria-label="Close lightbox">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Previous">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="lb-stage"><div class="lb-img" id="lbImg"></div></div>
+  <button class="lb-arrow lb-next" id="lbNext" aria-label="Next">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <p class="lb-count" id="lbCount"></p>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="backTop" class="back-top" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script src="script.js"></script>
+</body>
+</html>
