@@ -528,7 +528,7 @@ function initGallery() {
   const grid = $('#galleryGrid');
   const items = [
     { src: 'assets/img/bananajealousy.jpg',              name: 'Banana Jealousy'         },
-    { src: 'assets/img/bananajealousy.mp4',              name: 'Banana Jealousy'         },
+    { src: 'assets/img/chinadoll23.mp4',                 name: 'China Doll 23'           },
     { src: 'assets/img/FunYuns.jpg',                     name: 'Fun Yuns'                },
     { src: 'assets/img/japenesejam.mp4',                 name: 'Japanese Jam'            },
     { src: 'assets/img/slowmagic.mp4',                   name: 'Slow Magic'              },
@@ -676,23 +676,19 @@ function initBackToTop() {
    SEEDS DATA & GRID
 ═══════════════════════════════════════════════════════════ */
 const SEEDS = [
-  // Feminized
-  { id: 'sf1', name: 'Red Katanaz',     type: 'fem',  cat: 'gas',    thc: '29–33%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'Fuel-forward gas genetics pulled straight from our top-performing Red Katanaz mother. Dense structure, high resin, consistent every run.' },
-  { id: 'sf2', name: 'Venuz #4',        type: 'fem',  cat: 'og',     thc: '27–31%', prices: { '5pk': 90,  '10pk': 165 }, desc: 'Our most requested OG pheno, now available as seeds. Lemon-pine expression with classic earth finish. Verified from our #4 keeper cut.' },
-  { id: 'sf3', name: 'Banana Jealousy', type: 'fem',  cat: 'candy',  thc: '28–32%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'Cream, banana, and sweet funk in a highly stable fem line. Exceptional bag appeal and consistency across phenotypes.' },
-  { id: 'sf4', name: 'Gelato 41',       type: 'fem',  cat: 'exotic', thc: '26–30%', prices: { '5pk': 80,  '10pk': 145 }, desc: 'True Gelato 41 lineage — dessert-forward with spiced depth. Dense, colorful, and built for yield without sacrificing quality.' },
-  { id: 'sf5', name: 'Wedding Cake',    type: 'fem',  cat: 'exotic', thc: '25–29%', prices: { '5pk': 80,  '10pk': 145 }, desc: 'Vanilla, tangy pepper, dense structure. Our Wedding Cake fem line bridges gas and candy lovers. Excellent for intermediate to advanced growers.' },
-  { id: 'sf6', name: 'Ghost OG',        type: 'fem',  cat: 'og',     thc: '25–29%', prices: { '5pk': 80,  '10pk': 145 }, desc: 'Legendary OG genetics in a stable feminized form. Earth, citrus, pine — a benchmark expression that holds up run after run.' },
-  // Auto-Flowering
-  { id: 'sa1', name: 'Runtz Auto',      type: 'auto', cat: 'candy',  thc: '22–26%', prices: { '5pk': 70,  '10pk': 125 }, desc: 'Auto version of our Runtz line. Grape candy profile in a fast-finishing, compact structure. Great for shorter seasons and tighter spaces.' },
-  { id: 'sa2', name: 'OG Kush Auto',    type: 'auto', cat: 'og',     thc: '20–24%', prices: { '5pk': 65,  '10pk': 115 }, desc: 'Classic OG Kush dialed into an auto format. Myrcene-heavy, earthy and grounding. Reliable finish time and solid canopy management.' },
-  { id: 'sa3', name: 'Ice Cream Cake Auto', type: 'auto', cat: 'exotic', thc: '22–26%', prices: { '5pk': 70, '10pk': 125 }, desc: 'Vanilla cream auto that finishes fast without losing flavor. One of the most visually striking autos we run — purple hues, heavy frost.' },
-  { id: 'sa4', name: 'Stardawg Auto',   type: 'auto', cat: 'gas',    thc: '20–24%', prices: { '5pk': 65,  '10pk': 115 }, desc: 'Diesel lineage in a low-maintenance auto format. Classic gas nose, star trichome pattern, and clean cultivation all the way through.' },
+  { id: 'sf1',  name: 'Bleu Blazzé',            cross: 'Bleuz x ZKZ',                    type: 'fem', cat: 'exotic', thc: '26–30%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'A striking exotic cross pairing Bleuz with ZKZ. Deep berry tones, resinous structure, and a profile built for the collector.' },
+  { id: 'sf2',  name: 'Frozen Nectar',           cross: 'Banana Jealousy x ZKZ',          type: 'fem', cat: 'candy',  thc: '27–31%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'Sweet banana cream meets ZKZ terps. Exceptionally stacked trichome coverage with a candy-forward finish every time.' },
+  { id: 'sf3',  name: 'Champagne Gutz',          cross: 'Champagne Tears x ZKZ',          type: 'fem', cat: 'exotic', thc: '26–30%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'Bubbly and complex — Champagne Tears brings the effervescence, ZKZ locks in the structure. A standout exotic for experienced growers.' },
+  { id: 'sf4',  name: 'Shockwavez',              cross: 'Yellow Mermaid #13 x ZKZ',       type: 'fem', cat: 'exotic', thc: '28–32%', prices: { '5pk': 90,  '10pk': 165 }, desc: 'Yellow Mermaid #13 is a proven pheno — crossed with ZKZ it delivers vivid color, loud terps, and serious bag appeal.' },
+  { id: 'sf5',  name: 'Boise Broncoz',           cross: 'Blumosa x ZKZ',                  type: 'fem', cat: 'gas',    thc: '27–31%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'Blumosa\'s bold gas character pushed through ZKZ genetics. Dense, frosty, and consistently hard-hitting from seed.' },
+  { id: 'sf6',  name: 'KZ BX2',                  cross: 'KZ3M x ZKZ',                     type: 'fem', cat: 'gas',    thc: '28–32%', prices: { '5pk': 90,  '10pk': 165 }, desc: 'A second-generation backcross deepening the KZ line. Refined gas structure with improved uniformity and resin expression.' },
+  { id: 'sf7',  name: 'Super Saiyan',            cross: 'Sunset Sherbert x ZKZ',          type: 'fem', cat: 'candy',  thc: '26–30%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'Sunset Sherbert\'s dessert sweetness amplified by ZKZ\'s power. Energetic growth, vibrant phenotypes, elite terpene output.' },
+  { id: 'sf8',  name: 'Hawaiian Shaved Ice',     cross: 'Pineapple Zkittlez x ZKZ',       type: 'fem', cat: 'candy',  thc: '25–29%', prices: { '5pk': 80,  '10pk': 145 }, desc: 'Tropical pineapple sweetness from Pineapple Zkittlez meets ZKZ\'s legendary resin. A summer-ready cultivar with serious visual appeal.' },
+  { id: 'sf9',  name: 'Berry Brioche',           cross: 'Tmzangria x ZKZ',                type: 'fem', cat: 'exotic', thc: '26–30%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'Rich berry pastry notes from Tmzangria layered over ZKZ\'s deep structure. Complex, aromatic, and visually stunning at harvest.' },
+  { id: 'sf10', name: 'Grapefruit Rainbowz',     cross: 'Presidential Squirts x ZKZ',     type: 'fem', cat: 'exotic', thc: '27–31%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'Presidential Squirts lineage crossed with ZKZ brings citrus-forward terps, rainbow-hued calyxes, and elite bag presence.' },
 ];
 
 const TYPE_LABEL = { fem: 'Feminized', auto: 'Auto-Flowering' };
-
-const SEED_PAGE_SIZE = 6;
 
 function initSeedsGrid() {
   const grid  = $('#seedsGrid');
@@ -700,33 +696,86 @@ function initSeedsGrid() {
   let current = 'all';
   let page    = 0;
 
+  function pageSize() { return 4; }
+
   function getList() {
     return current === 'all' ? SEEDS : SEEDS.filter(s => s.type === current);
   }
 
   function renderSeedPagination(list) {
-    let pagEl = $('#seedsPagination');
+    const pagEl = $('#seedsPagination');
     if (!pagEl) return;
-    const total = Math.ceil(list.length / SEED_PAGE_SIZE);
+    const ps    = pageSize();
+    const total = Math.ceil(list.length / ps);
     if (total <= 1) { pagEl.innerHTML = ''; return; }
-    pagEl.innerHTML = `
-      <button class="pag-btn" id="seedPagPrev" ${page === 0 ? 'disabled' : ''} aria-label="Previous page">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-        Prev
-      </button>
-      <span class="pag-info">Page ${page + 1} of ${total}</span>
-      <button class="pag-btn" id="seedPagNext" ${page >= total - 1 ? 'disabled' : ''} aria-label="Next page">
-        Next
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>`;
-    $('#seedPagPrev').addEventListener('click', () => { page--; renderSeeds(); });
-    $('#seedPagNext').addEventListener('click', () => { page++; renderSeeds(); });
+
+    if (window.innerWidth <= 768) {
+      // Arrows + dot indicators for mobile
+      pagEl.innerHTML = `
+        <div class="seed-pag-row">
+          <button class="seed-arrow" id="seedArrPrev" ${page === 0 ? 'disabled' : ''} aria-label="Previous page">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="seed-dots">${
+            Array.from({ length: total }, (_, i) =>
+              `<button class="seed-dot${i === page ? ' active' : ''}" data-page="${i}" aria-label="Page ${i + 1}"></button>`
+            ).join('')
+          }</div>
+          <button class="seed-arrow" id="seedArrNext" ${page >= total - 1 ? 'disabled' : ''} aria-label="Next page">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>`;
+      pagEl.querySelectorAll('.seed-dot').forEach(dot => {
+        dot.addEventListener('click', () => { page = +dot.dataset.page; renderSeeds(); });
+      });
+      $('#seedArrPrev').addEventListener('click', () => { if (page > 0) { page--; renderSeeds(); } });
+      $('#seedArrNext').addEventListener('click', () => { if (page < total - 1) { page++; renderSeeds(); } });
+    } else {
+      pagEl.innerHTML = `
+        <div class="seed-pag-row">
+          <button class="seed-arrow" id="seedPagPrev" ${page === 0 ? 'disabled' : ''} aria-label="Previous page">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="seed-dots">${
+            Array.from({ length: total }, (_, i) =>
+              `<button class="seed-dot${i === page ? ' active' : ''}" data-page="${i}" aria-label="Page ${i + 1}"></button>`
+            ).join('')
+          }</div>
+          <button class="seed-arrow" id="seedPagNext" ${page >= total - 1 ? 'disabled' : ''} aria-label="Next page">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>`;
+      pagEl.querySelectorAll('.seed-dot').forEach(dot => {
+        dot.addEventListener('click', () => { page = +dot.dataset.page; renderSeeds(); });
+      });
+      $('#seedPagPrev').addEventListener('click', () => { if (page > 0) { page--; renderSeeds(); } });
+      $('#seedPagNext').addEventListener('click', () => { if (page < total - 1) { page++; renderSeeds(); } });
+    }
   }
+
+  // Touch swipe
+  let swipeX = 0;
+  let swipeY = 0;
+  grid.addEventListener('touchstart', e => {
+    swipeX = e.touches[0].clientX;
+    swipeY = e.touches[0].clientY;
+  }, { passive: true });
+  grid.addEventListener('touchend', e => {
+    if (window.innerWidth > 768) return;
+    const dx = e.changedTouches[0].clientX - swipeX;
+    const dy = e.changedTouches[0].clientY - swipeY;
+    if (Math.abs(dx) < 40 || Math.abs(dy) > Math.abs(dx)) return;
+    const list  = getList();
+    const total = Math.ceil(list.length / pageSize());
+    if (dx < 0 && page < total - 1) { page++; renderSeeds(); }
+    else if (dx > 0 && page > 0)    { page--; renderSeeds(); }
+  }, { passive: true });
 
   function renderSeeds() {
     grid.innerHTML = '';
+    const ps    = pageSize();
     const list  = getList();
-    const slice = list.slice(page * SEED_PAGE_SIZE, (page + 1) * SEED_PAGE_SIZE);
+    const slice = list.slice(page * ps, (page + 1) * ps);
     slice.forEach((s, i) => {
       const card = document.createElement('div');
       card.className = 'seed-card';
@@ -742,6 +791,7 @@ function initSeedsGrid() {
             <span class="strain-cat">${s.cat}</span>
           </div>
           <h3 class="strain-name">${s.name}</h3>
+          ${s.cross ? `<p class="seed-card__cross">${s.cross}</p>` : ''}
           <p class="strain-thc">THC <strong>${s.thc}</strong></p>
           <p class="seed-card__desc">${s.desc}</p>
           <div class="seed-card__footer">
