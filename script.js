@@ -1,6 +1,6 @@
 /* ============================================================
    WakaGrown — script.js
-   Age gate · Nav · Carousel · Strain grid · Lightbox ·
+   Nav · Carousel · Strain grid · Lightbox ·
    Accordion · Contact · Cart · Scroll reveal · Back-to-top
    ============================================================ */
 
@@ -10,41 +10,29 @@
 const $ = (sel, ctx) => (ctx || document).querySelector(sel);
 const $$ = (sel, ctx) => [...(ctx || document).querySelectorAll(sel)];
 
-/* ── STRAIN DATA (28 cultivars) ──────────────────────────────── */
+/* ── STRAIN DATA (16 cultivars) ──────────────────────────────── */
 // prices: { '7g': X, '14g': Y, '28g': Z }
 const STRAINS = [
   // GAS
-  { id: 1,  name: 'Presidential Squirts 75',     cat: 'gas',    thc: '29–33%', prices: { '7g': 195, '14g': 360, '28g': 660 }, terps: ['Caryophyllene','Myrcene','Limonene'],     desc: 'A signature gas cultivar delivering fuel-forward aromatics with a sharp, chassis-rattling exhale. Dense nugs, gassy nose, zero fluff.',                                                                              photos: ['assets/img/strain-1.png', 'assets/img/presidentialsquirts75flower.MP4'] },
-  { id: 2,  name: 'White Truffle Gas',            cat: 'gas',    thc: '26–30%', prices: { '7g': 190, '14g': 350, '28g': 640 }, terps: ['Myrcene','Caryophyllene','Linalool'],     desc: 'Earth, musk, and petrol collide in one of the most complex gas profiles in the catalog. Heavy and grounding — the room knows.',                                                                                      photos: [] },
-  { id: 3,  name: 'Jet Fuel Gelato',              cat: 'gas',    thc: '27–31%', prices: { '7g': 185, '14g': 340, '28g': 620 }, terps: ['Limonene','Caryophyllene','Terpinolene'], desc: 'Sharp jet-fuel bite smoothed out by a creamy Gelato finish. Loud on the break, long on the exhale. A crowd favorite for good reason.',                                                                                photos: [] },
-  { id: 4,  name: 'Garlic Cookies',               cat: 'gas',    thc: '25–29%', prices: { '7g': 185, '14g': 340, '28g': 620 }, terps: ['Myrcene','Caryophyllene','Ocimene'],      desc: 'Savory garlic funk with a biscotti back note. One of the most polarizing and respected aromas in the catalog — not for the faint of nose.',                                                                          photos: [] },
-  { id: 5,  name: 'Stardawg',                     cat: 'gas',    thc: '24–28%', prices: { '7g': 180, '14g': 325, '28g': 600 }, terps: ['Caryophyllene','Myrcene','Pinene'],       desc: 'Old-school Chemdawg lineage brought forward with clean cultivation. Classic diesel star pattern, crystalline coverage, timeless.',                                                                                    photos: [] },
-  { id: 6,  name: 'Sour Diesel OG',               cat: 'gas',    thc: '25–29%', prices: { '7g': 180, '14g': 325, '28g': 600 }, terps: ['Limonene','Myrcene','Caryophyllene'],    desc: 'East Coast fuel meets West Coast OG structure. Cerebral and sharp. One of the most copied and least-matched profiles going.',                                                                                        photos: [] },
-  { id: 7,  name: 'Biscotti Gas',                 cat: 'gas',    thc: '26–30%', prices: { '7g': 185, '14g': 340, '28g': 620 }, terps: ['Caryophyllene','Limonene','Linalool'],   desc: 'Baked cookie dough laced with a gassy exhale. The cross delivers depth that neither parent achieves on their own.',                                                                                                   photos: [] },
-  { id: 8,  name: 'Zkittlez Gas',                 cat: 'gas',    thc: '23–27%', prices: { '7g': 180, '14g': 325, '28g': 600 }, terps: ['Myrcene','Limonene','Caryophyllene'],    desc: 'Gas lineage crossed with Zkittlez sweetness to create a hybrid profile that hits fruity on the nose and fuel on the back.',                                                                                          photos: [] },
-  // CANDY
-  { id: 9,  name: 'Banana Jealousy',              cat: 'candy',  thc: '28–32%', prices: { '7g': 190, '14g': 350, '28g': 640 }, terps: ['Myrcene','Limonene','Linalool'],         desc: 'Banana Cream meets Jealousy for one of the most dessert-forward profiles in the run. Cream, banana, and sweet funk — incredibly smooth.',                                                                            photos: [] },
-  { id: 10, name: 'Runtz',                        cat: 'candy',  thc: '24–28%', prices: { '7g': 185, '14g': 340, '28g': 620 }, terps: ['Limonene','Caryophyllene','Linalool'],   desc: 'Grape candy meets tropical fruit in the strain that defined a generation. Our pheno runs tight, dense, and true to its lineage.',                                                                                    photos: [] },
-  { id: 11, name: 'Candy Rain',                   cat: 'candy',  thc: '25–29%', prices: { '7g': 185, '14g': 340, '28g': 620 }, terps: ['Linalool','Limonene','Myrcene'],         desc: 'London Poundcake x Grape Gasoline. Sweet rain on a warm night — tropical fruit, floral undertone, sugar-dusted finish.',                                                                                             photos: [] },
-  { id: 12, name: 'Peach Ringz',                  cat: 'candy',  thc: '23–27%', prices: { '7g': 175, '14g': 310, '28g': 575 }, terps: ['Myrcene','Limonene','Ocimene'],          desc: 'Exactly what it promises. Peachy candy aroma with a light, airy structure. Bright and clean, perfect for those who ride candy profiles.',                                                                           photos: [] },
-  { id: 13, name: 'Gushers',                      cat: 'candy',  thc: '22–26%', prices: { '7g': 185, '14g': 340, '28g': 620 }, terps: ['Limonene','Myrcene','Caryophyllene'],    desc: 'Tropical Zkittlez x Gelato #41. Candy-coated gassy punch with a juicy, fruity core. One of the best crossover strains in recent memory.',                                                                          photos: [] },
-  { id: 14, name: 'Punch Breath',                 cat: 'candy',  thc: '24–28%', prices: { '7g': 180, '14g': 325, '28g': 600 }, terps: ['Linalool','Myrcene','Caryophyllene'],    desc: 'Purple Punch x Mendo Breath. Grape punch sweetness with a heavy, doughy exhale. The calming candy pick in the catalog.',                                                                                            photos: [] },
-  { id: 15, name: 'Cotton Candy Kush',            cat: 'candy',  thc: '21–25%', prices: { '7g': 175, '14g': 310, '28g': 575 }, terps: ['Linalool','Limonene','Terpinolene'],     desc: 'Light, airy sweetness with a Kush backbone. Cotton candy aroma that makes it immediately approachable — deceptively potent.',                                                                                        photos: [] },
+  { id: 1,  name: 'Cat Piss 69',                  cat: 'gas',    thc: '24–28%', prices: { '7g': 135, '14g': 260, '28g': 500 }, terps: ['Terpinolene','Myrcene','Ocimene'],        desc: 'A classic gas phenotype with a sharp, ammonia-forward bite and a clean, cerebral finish. Not for the passive nose — loud, proud, and unmistakable.',         photos: [] },
+  { id: 2,  name: 'Zkittlez x Gas Station Bob',   cat: 'gas',    thc: '25–29%', prices: { '7g': 150, '14g': 290, '28g': 550 }, terps: ['Limonene','Caryophyllene','Myrcene'],     desc: 'Zkittlez fruit sweetness run through Gas Station Bob\'s raw fuel backbone. A rare crossover that satisfies both camps — candy on the front, gas on the close.', photos: [] },
+  { id: 3,  name: 'Tetonaz',                       cat: 'gas',    thc: '26–30%', prices: { '7g': 155, '14g': 300, '28g': 575 }, terps: ['Caryophyllene','Myrcene','Pinene'],       desc: 'Mountain-bred gas with deep resin production and a sharp, earthy exhale. Dense structure, heavy coverage, consistent output every run.',                     photos: [] },
+  { id: 4,  name: 'Dog Walker OG',                 cat: 'gas',    thc: '25–29%', prices: { '7g': 145, '14g': 275, '28g': 525 }, terps: ['Myrcene','Caryophyllene','Limonene'],     desc: 'Albert Walker x Chemdawg 91. A slow, heavy gas cultivar with serious bag presence. Earthy, diesel, and deeply grounding — built for the end of the day.',   photos: [] },
   // OG
-  { id: 16, name: 'Venuz #4',                     cat: 'og',     thc: '27–31%', prices: { '7g': 195, '14g': 360, '28g': 660 }, terps: ['Myrcene','Caryophyllene','Linalool'],    desc: 'Our most sought-after OG pheno. Lemon-pine nose with a classic earthen foundation. Dense, trichome-packed, and true to its lineage in every run.',                                                                  photos: [] },
-  { id: 17, name: 'OG Kush',                      cat: 'og',     thc: '22–26%', prices: { '7g': 180, '14g': 325, '28g': 600 }, terps: ['Myrcene','Limonene','Caryophyllene'],    desc: 'The gold standard. Run properly, it is still one of the most complex and nuanced profiles in existence. Our cut does it justice.',                                                                                   photos: [] },
-  { id: 18, name: 'Larry OG',                     cat: 'og',     thc: '24–28%', prices: { '7g': 180, '14g': 325, '28g': 600 }, terps: ['Limonene','Myrcene','Pinene'],           desc: 'SFV OG x OG Kush. Lemon-citrus forward with a soft earthy close. One of the most balanced OG expressions available.',                                                                                               photos: [] },
-  { id: 19, name: 'Ghost OG',                     cat: 'og',     thc: '25–29%', prices: { '7g': 185, '14g': 340, '28g': 620 }, terps: ['Caryophyllene','Myrcene','Limonene'],    desc: "Legendary cut. Earth, citrus, and pine locked in an OG structure that still doesn't miss. A benchmark in any serious collection.",                                                                                  photos: [] },
-  { id: 20, name: 'Master OG',                    cat: 'og',     thc: '24–28%', prices: { '7g': 185, '14g': 340, '28g': 620 }, terps: ['Myrcene','Linalool','Caryophyllene'],    desc: 'Hindu Kush x Empress OG. Heavy body, hashy spice, and a deep floral undertone. A quiet powerhouse that earns its name.',                                                                                            photos: [] },
-  { id: 21, name: 'Bubba Kush',                   cat: 'og',     thc: '20–24%', prices: { '7g': 175, '14g': 310, '28g': 575 }, terps: ['Myrcene','Linalool','Caryophyllene'],    desc: 'Classic American Kush with chocolate-coffee notes and a dense, greasy structure. The late-night pick in the OG roster.',                                                                                             photos: [] },
-  { id: 22, name: 'King Louis XIII',              cat: 'og',     thc: '23–27%', prices: { '7g': 180, '14g': 325, '28g': 600 }, terps: ['Myrcene','Caryophyllene','Pinene'],      desc: 'Pine-heavy OG with a musty, earthy base. Strong and clear. A regal expression of what West Coast OG is supposed to be.',                                                                                             photos: [] },
+  { id: 5,  name: 'Sin Valley OG',                 cat: 'og',     thc: '25–29%', prices: { '7g': 150, '14g': 290, '28g': 550 }, terps: ['Myrcene','Limonene','Caryophyllene'],     desc: 'SFV OG lineage with a sharp lemon-pine nose and heavy OG structure. Delivers the full classic experience — dense, resinous, and utterly reliable.',          photos: [] },
+  { id: 6,  name: 'Rudeboi OG #1',                 cat: 'og',     thc: '26–30%', prices: { '7g': 175, '14g': 335, '28g': 650 }, terps: ['Caryophyllene','Myrcene','Linalool'],     desc: 'A sought-after OG cut with a fuel-and-earth nose and serious resin output. The #1 pheno for a reason — everything an OG collector wants in one plant.',    photos: [] },
   // EXOTIC
-  { id: 23, name: 'Mimosa',                       cat: 'exotic', thc: '22–26%', prices: { '7g': 180, '14g': 325, '28g': 600 }, terps: ['Limonene','Myrcene','Ocimene'],          desc: 'Clementine x Purple Punch. Bright citrus champagne aroma with a light tropical body. Uplifting and elegant — a rare morning profile.',                                                                               photos: [] },
-  { id: 24, name: 'Cereal Milk',                  cat: 'exotic', thc: '23–27%', prices: { '7g': 185, '14g': 340, '28g': 620 }, terps: ['Limonene','Myrcene','Linalool'],         desc: 'Y Life x Snowman. The milk left over from a bowl of fruity cereal — sweet, creamy, and indulgent. One of the more original profiles in the game.',                                                                  photos: [] },
-  { id: 25, name: 'Gelato 41',                    cat: 'exotic', thc: '26–30%', prices: { '7g': 190, '14g': 350, '28g': 640 }, terps: ['Caryophyllene','Limonene','Linalool'],   desc: 'Thin Mint GSC x Sherbet. Rich dessert profile with sweet-spicy depth. Dense and colorful nugs with a creamy exhale that lingers.',                                                                                   photos: [] },
-  { id: 26, name: 'Ice Cream Cake',               cat: 'exotic', thc: '24–28%', prices: { '7g': 190, '14g': 350, '28g': 640 }, terps: ['Linalool','Myrcene','Caryophyllene'],    desc: 'Wedding Cake x Gelato #33. Vanilla icing, sweet cream, and a sugary close. One of the most visually striking and aromatically rich exotics we run.',                                                                photos: [] },
-  { id: 27, name: 'Purple Punch',                 cat: 'exotic', thc: '20–24%', prices: { '7g': 175, '14g': 310, '28g': 575 }, terps: ['Myrcene','Linalool','Caryophyllene'],    desc: 'Larry OG x Granddaddy Purple. Blueberry muffins with grape punch notes. Smooth, colorful, and endlessly pleasing in both profile and appearance.',                                                                  photos: [] },
-  { id: 28, name: 'Wedding Cake',                 cat: 'exotic', thc: '25–29%', prices: { '7g': 190, '14g': 350, '28g': 640 }, terps: ['Caryophyllene','Limonene','Myrcene'],    desc: 'Triangle Kush x Animal Mints. Vanilla and tangy pepper in a dense, sticky package. The exotic that bridges gas lovers and candy enthusiasts.',                                                                       photos: [] },
+  { id: 7,  name: 'Grapefruit Rainbowz',           cat: 'exotic', thc: '27–31%', prices: { '7g': 210, '14g': 405, '28g': 775 }, terps: ['Limonene','Ocimene','Myrcene'],           desc: 'Presidential Squirts x ZKZ. Citrus-forward rainbow of terps with vivid color at harvest. Loud, layered, and visually striking from every angle.',           photos: [] },
+  { id: 8,  name: 'Boise Blu',                     cat: 'exotic', thc: '26–30%', prices: { '7g': 195, '14g': 375, '28g': 725 }, terps: ['Myrcene','Linalool','Caryophyllene'],     desc: 'Blumosa lineage with deep blue-purple hues, a floral body, and a sweet gas close. One of the most visually stunning cuts in this run.',                    photos: [] },
+  { id: 9,  name: 'Champagne Gutz',                cat: 'exotic', thc: '26–30%', prices: { '7g': 205, '14g': 395, '28g': 750 }, terps: ['Linalool','Limonene','Caryophyllene'],    desc: 'Champagne Tears x ZKZ. Effervescent, complex, and strikingly aromatic. Layers of floral, fruit, and a bubbly finish that builds with every exhale.',        photos: [] },
+  { id: 10, name: 'Sherbanger F2',                 cat: 'exotic', thc: '27–31%', prices: { '7g': 185, '14g': 355, '28g': 675 }, terps: ['Caryophyllene','Limonene','Linalool'],    desc: 'Second-generation Sherbanger with refined phenotype expression. Sherbet\'s creamy sweetness locked into a dense, frosty structure with serious bag appeal.',  photos: [] },
+  { id: 11, name: 'Sherbzooka',                    cat: 'exotic', thc: '26–30%', prices: { '7g': 180, '14g': 345, '28g': 650 }, terps: ['Limonene','Myrcene','Linalool'],           desc: 'Sherbet-forward exotic with a bazooka-level punch. Creamy, fruity, and stacked with trichomes — one of the more immediately impressive exotics in the run.', photos: [] },
+  { id: 12, name: 'Wild Lÿfe',                     cat: 'exotic', thc: '25–29%', prices: { '7g': 165, '14g': 315, '28g': 600 }, terps: ['Terpinolene','Ocimene','Limonene'],       desc: 'An unbridled exotic with bright, tropical terps and an expressive structure that changes pheno to pheno. Wild by nature, refined by cultivation.',            photos: [] },
+  { id: 13, name: 'China Doll',                    cat: 'exotic', thc: '25–29%', prices: { '7g': 165, '14g': 315, '28g': 600 }, terps: ['Linalool','Myrcene','Caryophyllene'],     desc: 'Delicate floral nose with a smooth, creamy exhale and a dense, well-structured bud. Understated on the outside, unforgettable once broken open.',           photos: [] },
+  { id: 14, name: 'Yellow Zushi',                  cat: 'exotic', thc: '26–30%', prices: { '7g': 220, '14g': 420, '28g': 800 }, terps: ['Limonene','Caryophyllene','Ocimene'],     desc: 'Zushi lineage with a bright yellow-gold expression and a citrus-spice nose that hits immediately. Dense, resinous, and unmistakable on the tray.',           photos: [] },
+  // CANDY
+  { id: 15, name: 'Berry Brioche',                 cat: 'candy',  thc: '26–30%', prices: { '7g': 175, '14g': 335, '28g': 650 }, terps: ['Linalool','Myrcene','Limonene'],           desc: 'Tmzangria x ZKZ. Rich berry pastry with a buttery, doughy base. Complex and aromatic — a dessert-forward candy cultivar with real depth behind the sweetness.', photos: [] },
+  { id: 16, name: 'Biscotti Kitty',                cat: 'candy',  thc: '25–29%', prices: { '7g': 155, '14g': 300, '28g': 575 }, terps: ['Caryophyllene','Linalool','Limonene'],    desc: 'Biscotti lineage with a sweet, baked-cookie nose and a smooth candy finish. Smooth structure, excellent bag presence, and a flavor that stays on the palate.', photos: [] },
 ];
 
 // Category-specific gradient palettes — each cat has its own visual identity
@@ -221,7 +209,6 @@ function initCarousel() {
       <div class="c-card-body">
         <p class="c-card-cat">${s.cat}</p>
         <h3 class="c-card-name">${s.name}</h3>
-        <p class="c-card-thc">THC <strong>${s.thc}</strong></p>
         <div class="c-card-footer">
           <span class="c-card-price">from $${s.prices['7g']}</span>
           <button class="atc-btn" aria-label="View ${s.name}">Details</button>
@@ -235,17 +222,8 @@ function initCarousel() {
     track.appendChild(card);
   });
 
-  // Dots
   let activeDot = 0;
-  const dots = [];
-  for (let i = 0; i < featured.length; i++) {
-    const d = document.createElement('button');
-    d.className = 'c-dot' + (i === 0 ? ' active' : '');
-    d.setAttribute('aria-label', `Go to slide ${i + 1}`);
-    d.addEventListener('click', () => goTo(i));
-    dotsWrap.appendChild(d);
-    dots.push(d);
-  }
+  let dots = [];
 
   function getVisibleCount() {
     const vw   = viewport.offsetWidth;
@@ -254,11 +232,29 @@ function initCarousel() {
     return Math.max(1, Math.round(vw / (card.offsetWidth + 16)));
   }
 
+  function getMax() {
+    return Math.max(0, featured.length - getVisibleCount());
+  }
+
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    dots = [];
+    const count = getMax() + 1;
+    for (let i = 0; i < count; i++) {
+      const d = document.createElement('button');
+      d.className = 'c-dot' + (i === activeDot ? ' active' : '');
+      d.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+      dots.push(d);
+    }
+  }
+
   function goTo(idx) {
     const cards = $$('.c-card', track);
     if (!cards.length) return;
     const cardW = cards[0].offsetWidth + 16;
-    const max   = cards.length - getVisibleCount();
+    const max   = getMax();
     idx = Math.max(0, Math.min(idx, max));
     activeDot = idx;
     track.style.transform = `translateX(-${idx * cardW}px)`;
@@ -267,9 +263,11 @@ function initCarousel() {
     next.disabled = idx >= max;
   }
 
+  buildDots();
+  goTo(0);
+
   prev.addEventListener('click', () => goTo(activeDot - 1));
   next.addEventListener('click', () => goTo(activeDot + 1));
-  goTo(0);
 
   let touchX = 0;
   viewport.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
@@ -278,7 +276,11 @@ function initCarousel() {
     if (Math.abs(diff) > 40) goTo(activeDot + (diff > 0 ? 1 : -1));
   }, { passive: true });
 
-  window.addEventListener('resize', () => goTo(activeDot));
+  window.addEventListener('resize', () => {
+    activeDot = Math.min(activeDot, getMax());
+    buildDots();
+    goTo(activeDot);
+  });
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -333,7 +335,6 @@ function initStrainsGrid() {
         <div class="strain-body">
           <p class="strain-cat">${s.cat}</p>
           <h3 class="strain-name">${s.name}</h3>
-          <p class="strain-thc">THC <strong>${s.thc}</strong></p>
           <div class="strain-footer">
             <span class="strain-price">from $${s.prices['7g']}</span>
             <button class="atc-btn atc-btn--sm" aria-label="View ${s.name}">Details</button>
@@ -413,7 +414,6 @@ function openStrainModal(s) {
   const pillEl   = $('#modalPill');
   const descEl   = $('#modalDesc');
   const terpsEl  = $('#modalTerps');
-  const thcEl    = $('#modalThc');
   const priceEl  = $('#modalPrice');
 
   // Build media carousel or placeholder
@@ -469,7 +469,6 @@ function openStrainModal(s) {
   nameEl.textContent = s.name;
   pillEl.textContent = s.cat;
   descEl.textContent = s.desc;
-  thcEl.textContent  = s.thc;
   terpsEl.innerHTML  = s.terps.map(t => `<li>${t}</li>`).join('');
 
   // Weight selector
@@ -498,7 +497,7 @@ function openStrainModal(s) {
     newBtn.addEventListener('click', () => {
       const weight = selectedWeight;
       const price  = s.prices[weight];
-      const msg    = `Hi! I want to order:\n*${s.name}* — ${weight} @ $${price}\nTHC: ${s.thc}`;
+      const msg    = `Hi! I want to order:\n*${s.name}* — ${weight} @ $${price}`;
       window.open(`https://t.me/wakagrown420?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
       close();
     });
@@ -535,18 +534,76 @@ function initGallery() {
     { src: 'assets/img/whiteash.mp4',                    name: ''                        },
   ];
 
+  const MAX_RETRIES = 3;
+
+  function galFallback(wrap) {
+    wrap.innerHTML = `
+      <div class="gal-fallback">
+        <span class="gal-fallback__mark">W</span>
+        <span class="gal-fallback__label">Coming Soon</span>
+      </div>`;
+  }
+
+  function retryImage(src, wrap, alt, attempt) {
+    const img = new Image();
+    img.alt = alt;
+    img.onload = () => {
+      wrap.innerHTML = '';
+      wrap.appendChild(img);
+    };
+    img.onerror = () => {
+      if (attempt < MAX_RETRIES) {
+        setTimeout(() => retryImage(src, wrap, alt, attempt + 1), 800 * Math.pow(2, attempt));
+      } else {
+        galFallback(wrap);
+      }
+    };
+    img.src = src + (attempt > 0 ? '?r=' + attempt : '');
+  }
+
+  function retryVideo(src, wrap, attempt) {
+    const vid = document.createElement('video');
+    vid.autoplay = true;
+    vid.muted    = true;
+    vid.loop     = true;
+    vid.playsInline = true;
+    vid.setAttribute('playsinline', '');
+    vid.addEventListener('loadeddata', () => {}, { once: true });
+    vid.addEventListener('error', () => {
+      if (attempt < MAX_RETRIES) {
+        setTimeout(() => retryVideo(src, wrap, attempt + 1), 800 * Math.pow(2, attempt));
+      } else {
+        galFallback(wrap);
+      }
+    }, { once: true });
+    vid.src = src + (attempt > 0 ? '?r=' + attempt : '');
+    vid.load();
+    wrap.innerHTML = '';
+    wrap.appendChild(vid);
+  }
+
   items.forEach((item, i) => {
     const isVideo = /\.(mp4|webm|mov|ogg)$/i.test(item.src);
-    const mediaInner = isVideo
-      ? `<video src="${item.src}" autoplay muted loop playsinline></video>`
-      : `<img src="${item.src}" alt="${item.name}" loading="lazy">`;
 
     const div = document.createElement('div');
     div.className = 'gal-item';
     div.setAttribute('tabindex', '0');
-    div.innerHTML = `
-      <div class="gal-media-wrap">${mediaInner}</div>
-      <div class="gal-name">${item.name}</div>`;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'gal-media-wrap';
+
+    if (isVideo) {
+      retryVideo(item.src, wrap, 0);
+    } else {
+      retryImage(item.src, wrap, item.name, 0);
+    }
+
+    const nameEl = document.createElement('div');
+    nameEl.className = 'gal-name';
+    nameEl.textContent = item.name;
+
+    div.appendChild(wrap);
+    div.appendChild(nameEl);
     div.addEventListener('click', () => openLightbox(items, i));
     div.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(items, i); } });
     grid.appendChild(div);
@@ -676,19 +733,19 @@ function initBackToTop() {
    SEEDS DATA & GRID
 ═══════════════════════════════════════════════════════════ */
 const SEEDS = [
-  { id: 'sf1',  name: 'Bleu Blazzé',            cross: 'Bleuz x ZKZ',                    type: 'fem', cat: 'exotic', thc: '26–30%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'A striking exotic cross pairing Bleuz with ZKZ. Deep berry tones, resinous structure, and a profile built for the collector.' },
-  { id: 'sf2',  name: 'Frozen Nectar',           cross: 'Banana Jealousy x ZKZ',          type: 'fem', cat: 'candy',  thc: '27–31%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'Sweet banana cream meets ZKZ terps. Exceptionally stacked trichome coverage with a candy-forward finish every time.' },
-  { id: 'sf3',  name: 'Champagne Gutz',          cross: 'Champagne Tears x ZKZ',          type: 'fem', cat: 'exotic', thc: '26–30%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'Bubbly and complex — Champagne Tears brings the effervescence, ZKZ locks in the structure. A standout exotic for experienced growers.' },
-  { id: 'sf4',  name: 'Shockwavez',              cross: 'Yellow Mermaid #13 x ZKZ',       type: 'fem', cat: 'exotic', thc: '28–32%', prices: { '5pk': 90,  '10pk': 165 }, desc: 'Yellow Mermaid #13 is a proven pheno — crossed with ZKZ it delivers vivid color, loud terps, and serious bag appeal.' },
-  { id: 'sf5',  name: 'Boise Broncoz',           cross: 'Blumosa x ZKZ',                  type: 'fem', cat: 'gas',    thc: '27–31%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'Blumosa\'s bold gas character pushed through ZKZ genetics. Dense, frosty, and consistently hard-hitting from seed.' },
-  { id: 'sf6',  name: 'KZ BX2',                  cross: 'KZ3M x ZKZ',                     type: 'fem', cat: 'gas',    thc: '28–32%', prices: { '5pk': 90,  '10pk': 165 }, desc: 'A second-generation backcross deepening the KZ line. Refined gas structure with improved uniformity and resin expression.' },
-  { id: 'sf7',  name: 'Super Saiyan',            cross: 'Sunset Sherbert x ZKZ',          type: 'fem', cat: 'candy',  thc: '26–30%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'Sunset Sherbert\'s dessert sweetness amplified by ZKZ\'s power. Energetic growth, vibrant phenotypes, elite terpene output.' },
-  { id: 'sf8',  name: 'Hawaiian Shaved Ice',     cross: 'Pineapple Zkittlez x ZKZ',       type: 'fem', cat: 'candy',  thc: '25–29%', prices: { '5pk': 80,  '10pk': 145 }, desc: 'Tropical pineapple sweetness from Pineapple Zkittlez meets ZKZ\'s legendary resin. A summer-ready cultivar with serious visual appeal.' },
-  { id: 'sf9',  name: 'Berry Brioche',           cross: 'Tmzangria x ZKZ',                type: 'fem', cat: 'exotic', thc: '26–30%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'Rich berry pastry notes from Tmzangria layered over ZKZ\'s deep structure. Complex, aromatic, and visually stunning at harvest.' },
-  { id: 'sf10', name: 'Grapefruit Rainbowz',     cross: 'Presidential Squirts x ZKZ',     type: 'fem', cat: 'exotic', thc: '27–31%', prices: { '5pk': 85,  '10pk': 155 }, desc: 'Presidential Squirts lineage crossed with ZKZ brings citrus-forward terps, rainbow-hued calyxes, and elite bag presence.' },
+  { id: 'sf1',  name: 'Bleu Blazzé',            cross: 'Bleuz x ZKZ',                    type: 'reg', cat: 'exotic', thc: '26–30%', prices: { '12pk': 100 }, desc: 'A striking exotic cross pairing Bleuz with ZKZ. Deep berry tones, resinous structure, and a profile built for the collector.' },
+  { id: 'sf2',  name: 'Frozen Nectar',           cross: 'Banana Jealousy x ZKZ',          type: 'reg', cat: 'candy',  thc: '27–31%', prices: { '12pk': 100 }, desc: 'Sweet banana cream meets ZKZ terps. Exceptionally stacked trichome coverage with a candy-forward finish every time.' },
+  { id: 'sf3',  name: 'Champagne Gutz',          cross: 'Champagne Tears x ZKZ',          type: 'reg', cat: 'exotic', thc: '26–30%', prices: { '12pk': 150 }, desc: 'Bubbly and complex — Champagne Tears brings the effervescence, ZKZ locks in the structure. A standout exotic for experienced growers.' },
+  { id: 'sf4',  name: 'Shockwavez',              cross: 'Yellow Mermaid #13 x ZKZ',       type: 'reg', cat: 'exotic', thc: '28–32%', prices: { '12pk': 150 }, desc: 'Yellow Mermaid #13 is a proven pheno — crossed with ZKZ it delivers vivid color, loud terps, and serious bag appeal.' },
+  { id: 'sf5',  name: 'Boise Broncoz',           cross: 'Blumosa x ZKZ',                  type: 'reg', cat: 'gas',    thc: '27–31%', prices: { '12pk': 150 }, desc: 'Blumosa\'s bold gas character pushed through ZKZ genetics. Dense, frosty, and consistently hard-hitting from seed.' },
+  { id: 'sf6',  name: 'KZ BX2',                  cross: 'KZ3M x ZKZ',                     type: 'reg', cat: 'gas',    thc: '28–32%', prices: { '12pk': 100 }, desc: 'A second-generation backcross deepening the KZ line. Refined gas structure with improved uniformity and resin expression.' },
+  { id: 'sf7',  name: 'Super Saiyan',            cross: 'Sunset Sherbert x ZKZ',          type: 'reg', cat: 'candy',  thc: '26–30%', prices: { '12pk': 100 }, desc: 'Sunset Sherbert\'s dessert sweetness amplified by ZKZ\'s power. Energetic growth, vibrant phenotypes, elite terpene output.' },
+  { id: 'sf8',  name: 'Hawaiian Shaved Ice',     cross: 'Pineapple Zkittlez x ZKZ',       type: 'reg', cat: 'candy',  thc: '25–29%', prices: { '12pk': 100 }, desc: 'Tropical pineapple sweetness from Pineapple Zkittlez meets ZKZ\'s legendary resin. A summer-ready cultivar with serious visual appeal.' },
+  { id: 'sf9',  name: 'Berry Brioche',           cross: 'Tmzangria x ZKZ',                type: 'reg', cat: 'exotic', thc: '26–30%', prices: { '12pk': 100 }, desc: 'Rich berry pastry notes from Tmzangria layered over ZKZ\'s deep structure. Complex, aromatic, and visually stunning at harvest.' },
+  { id: 'sf10', name: 'Grapefruit Rainbowz',     cross: 'Presidential Squirts x ZKZ',     type: 'reg', cat: 'exotic', thc: '27–31%', prices: { '12pk': 150 }, desc: 'Presidential Squirts lineage crossed with ZKZ brings citrus-forward terps, rainbow-hued calyxes, and elite bag presence.' },
 ];
 
-const TYPE_LABEL = { fem: 'Feminized', auto: 'Auto-Flowering' };
+const TYPE_LABEL = { reg: 'Regular', fem: 'Feminized', auto: 'Auto-Flowering' };
 
 function initSeedsGrid() {
   const grid  = $('#seedsGrid');
@@ -792,12 +849,10 @@ function initSeedsGrid() {
           </div>
           <h3 class="strain-name">${s.name}</h3>
           ${s.cross ? `<p class="seed-card__cross">${s.cross}</p>` : ''}
-          <p class="strain-thc">THC <strong>${s.thc}</strong></p>
           <p class="seed-card__desc">${s.desc}</p>
           <div class="seed-card__footer">
             <div class="seed-prices">
-              <span class="seed-price-pill">5pk — <strong>$${s.prices['5pk']}</strong></span>
-              <span class="seed-price-pill">10pk — <strong>$${s.prices['10pk']}</strong></span>
+              <span class="seed-price-pill">12pk — <strong>$${s.prices['12pk']}</strong></span>
             </div>
             <a href="#contact" class="atc-btn atc-btn--sm">Inquire</a>
           </div>
