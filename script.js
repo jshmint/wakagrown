@@ -732,17 +732,24 @@ function initBackToTop() {
 /* ════════════════════════════════════════════════════════════
    SEEDS DATA & GRID
 ═══════════════════════════════════════════════════════════ */
+const SEED_PHOTOS = [
+  'assets/img/terpaholicsblack1.jpg',
+  'assets/img/terpaholicswhite1.jpg',
+  'assets/img/terpaholicsblack2.jpg',
+  'assets/img/terpaholicswhite2.jpg',
+];
+
 const SEEDS = [
-  { id: 'sf1',  name: 'Bleu Blazzé',            cross: 'Bleuz x ZKZ',                    type: 'reg', cat: 'exotic', thc: '26–30%', prices: { '12pk': 100 }, desc: 'A striking exotic cross pairing Bleuz with ZKZ. Deep berry tones, resinous structure, and a profile built for the collector.' },
-  { id: 'sf2',  name: 'Frozen Nectar',           cross: 'Banana Jealousy x ZKZ',          type: 'reg', cat: 'candy',  thc: '27–31%', prices: { '12pk': 100 }, desc: 'Sweet banana cream meets ZKZ terps. Exceptionally stacked trichome coverage with a candy-forward finish every time.' },
-  { id: 'sf3',  name: 'Champagne Gutz',          cross: 'Champagne Tears x ZKZ',          type: 'reg', cat: 'exotic', thc: '26–30%', prices: { '12pk': 150 }, desc: 'Bubbly and complex — Champagne Tears brings the effervescence, ZKZ locks in the structure. A standout exotic for experienced growers.' },
-  { id: 'sf4',  name: 'Shockwavez',              cross: 'Yellow Mermaid #13 x ZKZ',       type: 'reg', cat: 'exotic', thc: '28–32%', prices: { '12pk': 150 }, desc: 'Yellow Mermaid #13 is a proven pheno — crossed with ZKZ it delivers vivid color, loud terps, and serious bag appeal.' },
-  { id: 'sf5',  name: 'Boise Broncoz',           cross: 'Blumosa x ZKZ',                  type: 'reg', cat: 'gas',    thc: '27–31%', prices: { '12pk': 150 }, desc: 'Blumosa\'s bold gas character pushed through ZKZ genetics. Dense, frosty, and consistently hard-hitting from seed.' },
-  { id: 'sf6',  name: 'KZ BX2',                  cross: 'KZ3M x ZKZ',                     type: 'reg', cat: 'gas',    thc: '28–32%', prices: { '12pk': 100 }, desc: 'A second-generation backcross deepening the KZ line. Refined gas structure with improved uniformity and resin expression.' },
-  { id: 'sf7',  name: 'Super Saiyan',            cross: 'Sunset Sherbert x ZKZ',          type: 'reg', cat: 'candy',  thc: '26–30%', prices: { '12pk': 100 }, desc: 'Sunset Sherbert\'s dessert sweetness amplified by ZKZ\'s power. Energetic growth, vibrant phenotypes, elite terpene output.' },
-  { id: 'sf8',  name: 'Hawaiian Shaved Ice',     cross: 'Pineapple Zkittlez x ZKZ',       type: 'reg', cat: 'candy',  thc: '25–29%', prices: { '12pk': 100 }, desc: 'Tropical pineapple sweetness from Pineapple Zkittlez meets ZKZ\'s legendary resin. A summer-ready cultivar with serious visual appeal.' },
-  { id: 'sf9',  name: 'Berry Brioche',           cross: 'Tmzangria x ZKZ',                type: 'reg', cat: 'exotic', thc: '26–30%', prices: { '12pk': 100 }, desc: 'Rich berry pastry notes from Tmzangria layered over ZKZ\'s deep structure. Complex, aromatic, and visually stunning at harvest.' },
-  { id: 'sf10', name: 'Grapefruit Rainbowz',     cross: 'Presidential Squirts x ZKZ',     type: 'reg', cat: 'exotic', thc: '27–31%', prices: { '12pk': 150 }, desc: 'Presidential Squirts lineage crossed with ZKZ brings citrus-forward terps, rainbow-hued calyxes, and elite bag presence.' },
+  { id: 'sf1',  name: 'Bleu Blazzé',            cross: 'Bleuz x ZKZ',                    type: 'reg', cat: 'exotic', thc: '26–30%', prices: { '12pk': 100 }, desc: 'A striking exotic cross pairing Bleuz with ZKZ. Deep berry tones, resinous structure, and a profile built for the collector.',                         photo: SEED_PHOTOS[0] },
+  { id: 'sf2',  name: 'Frozen Nectar',           cross: 'Banana Jealousy x ZKZ',          type: 'reg', cat: 'candy',  thc: '27–31%', prices: { '12pk': 100 }, desc: 'Sweet banana cream meets ZKZ terps. Exceptionally stacked trichome coverage with a candy-forward finish every time.',                                   photo: SEED_PHOTOS[1] },
+  { id: 'sf3',  name: 'Champagne Gutz',          cross: 'Champagne Tears x ZKZ',          type: 'reg', cat: 'exotic', thc: '26–30%', prices: { '12pk': 150 }, desc: 'Bubbly and complex — Champagne Tears brings the effervescence, ZKZ locks in the structure. A standout exotic for experienced growers.',                photo: SEED_PHOTOS[2] },
+  { id: 'sf4',  name: 'Shockwavez',              cross: 'Yellow Mermaid #13 x ZKZ',       type: 'reg', cat: 'exotic', thc: '28–32%', prices: { '12pk': 150 }, desc: 'Yellow Mermaid #13 is a proven pheno — crossed with ZKZ it delivers vivid color, loud terps, and serious bag appeal.',                                photo: SEED_PHOTOS[3] },
+  { id: 'sf5',  name: 'Boise Blu',               cross: 'Blumosa x ZKZ',                  type: 'reg', cat: 'exotic', thc: '27–31%', prices: { '12pk': 150 }, desc: 'Blumosa\'s exotic character pushed through ZKZ genetics. Deep hues, resinous structure, and consistently striking results from seed.',              photo: SEED_PHOTOS[0] },
+  { id: 'sf6',  name: 'KZ BX2',                  cross: 'KZ3M x ZKZ',                     type: 'reg', cat: 'gas',    thc: '28–32%', prices: { '12pk': 100 }, desc: 'A second-generation backcross deepening the KZ line. Refined gas structure with improved uniformity and resin expression.',                          photo: SEED_PHOTOS[1] },
+  { id: 'sf7',  name: 'Super Saiyan',            cross: 'Sunset Sherbert x ZKZ',          type: 'reg', cat: 'candy',  thc: '26–30%', prices: { '12pk': 100 }, desc: 'Sunset Sherbert\'s dessert sweetness amplified by ZKZ\'s power. Energetic growth, vibrant phenotypes, elite terpene output.',                      photo: SEED_PHOTOS[2] },
+  { id: 'sf8',  name: 'Hawaiian Shaved Ice',     cross: 'Pineapple Zkittlez x ZKZ',       type: 'reg', cat: 'candy',  thc: '25–29%', prices: { '12pk': 100 }, desc: 'Tropical pineapple sweetness from Pineapple Zkittlez meets ZKZ\'s legendary resin. A summer-ready cultivar with serious visual appeal.',             photo: SEED_PHOTOS[3] },
+  { id: 'sf9',  name: 'Berry Brioche',           cross: 'Tmzangria x ZKZ',                type: 'reg', cat: 'exotic', thc: '26–30%', prices: { '12pk': 100 }, desc: 'Rich berry pastry notes from Tmzangria layered over ZKZ\'s deep structure. Complex, aromatic, and visually stunning at harvest.',                    photo: SEED_PHOTOS[0] },
+  { id: 'sf10', name: 'Grapefruit Rainbowz',     cross: 'Presidential Squirts x ZKZ',     type: 'reg', cat: 'exotic', thc: '27–31%', prices: { '12pk': 150 }, desc: 'Presidential Squirts lineage crossed with ZKZ brings citrus-forward terps, rainbow-hued calyxes, and elite bag presence.',                          photo: SEED_PHOTOS[1] },
 ];
 
 const TYPE_LABEL = { reg: 'Regular', fem: 'Feminized', auto: 'Auto-Flowering' };
@@ -838,9 +845,11 @@ function initSeedsGrid() {
       card.className = 'seed-card';
       card.style.animationDelay = `${i * 0.04}s`;
       card.innerHTML = `
-        <div class="seed-card__img" style="background:${catGrad(s.cat, parseInt(s.id.replace(/\D/g,'')))}">
-          <div class="strain-img__glow" style="background:radial-gradient(circle at 40% 60%,${CAT_GLOW[s.cat]},transparent 60%)"></div>
-          <span style="color:${CAT_LETTER[s.cat]};position:relative;z-index:1">${s.name[0]}</span>
+        <div class="seed-card__img" style="background:${s.photo ? '#0d1020' : catGrad(s.cat, parseInt(s.id.replace(/\D/g,'')))}">
+          ${s.photo
+            ? `<img src="${s.photo}" alt="${s.name}" style="width:100%;height:100%;object-fit:contain;display:block;">`
+            : `<div class="strain-img__glow" style="background:radial-gradient(circle at 40% 60%,${CAT_GLOW[s.cat]},transparent 60%)"></div>
+          <span style="color:${CAT_LETTER[s.cat]};position:relative;z-index:1">${s.name[0]}</span>`}
         </div>
         <div class="seed-card__body">
           <div class="seed-card__tags">
@@ -887,4 +896,47 @@ function initSite() {
   initBackToTop();
 }
 
-initAgeGate();
+/* ════════════════════════════════════════════════════════════
+   PASSWORD GATE
+═══════════════════════════════════════════════════════════ */
+const PW_KEY = 'waka_pw_v1';
+
+function initPasswordGate() {
+  const pwGate = $('#pwGate');
+  const stored = sessionStorage.getItem(PW_KEY);
+
+  if (stored === 'ok') {
+    pwGate.style.display = 'none';
+    initAgeGate();
+    return;
+  }
+
+  const form   = $('#pwForm');
+  const input  = $('#pwInput');
+  const error  = $('#pwError');
+  const toggle = $('#pwToggle');
+  const eyeShow = $('#pwEyeShow');
+  const eyeHide = $('#pwEyeHide');
+
+  toggle.addEventListener('click', () => {
+    const visible = input.type === 'text';
+    input.type = visible ? 'password' : 'text';
+    eyeShow.style.display = visible ? '' : 'none';
+    eyeHide.style.display = visible ? 'none' : '';
+  });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (input.value === 'wakagrown2026') {
+      try { sessionStorage.setItem(PW_KEY, 'ok'); } catch (_) {}
+      pwGate.style.display = 'none';
+      initAgeGate();
+    } else {
+      error.style.display = 'block';
+      input.value = '';
+      input.focus();
+    }
+  });
+}
+
+initPasswordGate();

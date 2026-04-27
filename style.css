@@ -196,6 +196,61 @@ ul { list-style: none; }
   letter-spacing: 0.02em;
 }
 
+/* ── PASSWORD GATE ──────────────────────────────────────────── */
+#pwGate {
+  position: fixed;
+  inset: 0;
+  background: var(--bg2);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.pw-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+.pw-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.pw-input {
+  width: 100%;
+  background: var(--bg2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--rad);
+  color: var(--text);
+  font-size: 0.95rem;
+  padding: 0.75rem 2.75rem 0.75rem 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  letter-spacing: 0.05em;
+}
+.pw-input::placeholder { color: var(--muted); }
+.pw-input:focus { border-color: var(--blue); }
+.pw-toggle {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+.pw-toggle:hover { color: var(--text); }
+.pw-error {
+  color: #f87171;
+  font-size: 0.82rem;
+  margin-top: 0.6rem;
+  text-align: center;
+}
+
 /* ── DENIED SCREEN ──────────────────────────────────────────── */
 .denied-screen {
   position: fixed;
@@ -626,6 +681,16 @@ ul { list-style: none; }
   max-width: 480px;
   margin-inline: auto;
 }
+.seeds-partner {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+.seeds-partner strong {
+  color: var(--accent);
+  font-weight: 600;
+}
 
 /* ── CAROUSEL ───────────────────────────────────────────────── */
 .carousel-outer {
@@ -1047,6 +1112,7 @@ ul { list-style: none; }
 @media (max-width: 700px) {
   .gallery-grid { columns: 2; column-gap: 0.75rem; padding: 0; }
   .gal-item     { margin-bottom: 0.75rem; }
+  .gal-name     { opacity: 1; transform: translateY(0); }
 }
 @media (max-width: 420px) {
   .gallery-grid { columns: 2; column-gap: 0.5rem; }
@@ -2350,7 +2416,13 @@ ul { list-style: none; }
   font-size: 4rem;
   font-weight: 900;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+}
+.seed-card__img img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .seed-card__body {
