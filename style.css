@@ -1517,6 +1517,8 @@ ul { list-style: none; }
   border-top: 1px solid rgba(255,255,255,0.07);
 }
 .footer-bot p { font-size: 0.75rem; color: rgba(255,255,255,0.28); }
+.footer-credit a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+.footer-credit a:hover { color: rgba(255,255,255,0.80); }
 
 .footer-reset {
   font-size: 0.72rem;
